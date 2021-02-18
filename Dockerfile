@@ -5,5 +5,5 @@ USER root
 #COPY upload/scripts /tmp/scripts
 #COPY upload/src /tmp/src
 #RUN chown -R 1001:0 /tmp/scripts /tmp/src
-RUN pwd
+RUN ls -all
 USER 1001
