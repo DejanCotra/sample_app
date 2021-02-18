@@ -1,15 +1,14 @@
 FROM registry.access.redhat.com/ubi8/python-38
 
-# Add application sources to a directory that the assemble script expects them
-# and set permissions so that the container runs without root access
+# Add application sources with correct permissions for OpenShift
 USER 0
-#ADD app-src /tmp/src
-#RUN /usr/bin/fix-permissions /tmp/src
-RUN yum install cmake
+ADD app-src .
+RUN chown -R 1001:0 ./
 USER 1001
 
 # Install the dependencies
-RUN /usr/libexec/s2i/assemble
+RUN pip install -U "pip>=19.3.1" && \
+    pip install -r requirements.txt
 
-# Set the default command for the resulting image
-CMD /usr/libexec/s2i/run
+# Run the application
+CMD python main.py
