@@ -1,13 +1,28 @@
+#!/usr/bin/env python3
 
-from flask import Flask  # From module flask import class Flask
+import socket
 
-app = Flask(__name__)    # Construct an instance of Flask class for our webapp
+HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
+PORT = 8080       # Port to listen on (non-privileged ports are > 1023)
 
-@app.route('/')   # URL '/' to be handled by main() route handler
-def main():
-    """Say hello"""
-    return 'Hello, world!'
+print (">>> Hello world <<<")
 
-if __name__ == '__main__':  # Script executed directly?
-    print("Hello World! Built with a Docker file.")
-    app.run(host="0.0.0.0", port=8080, debug=True,use_reloader=True)  # Launch built-in web server and run this Flask webapp
+""" while 1:
+    pass """
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((HOST, PORT))
+    s.listen()
+    conn, addr = s.accept()
+    with conn:
+        print('Connected by', addr)
+        while True:
+            # data = conn.recv(1024)
+            # if not data:
+            #     break
+            #conn.sendall()
+            conn.sendall(b'Hello, world')
+
+print (">>> End <<<")
+while 1:
+    pass
