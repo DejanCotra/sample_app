@@ -17,11 +17,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     with conn:
         print('Connected by', addr)
         while True:
-            # data = conn.recv(1024)
-            # if not data:
-            #     break
-            #conn.sendall()
-            conn.sendall(b'Hello, world')
+            data = conn.recv(1024)
+            if not data:
+                 break
+            conn.sendall(data)
+            #conn.sendall(b'Hello, world')
 
 print (">>> End <<<")
 while 1:
