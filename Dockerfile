@@ -7,7 +7,8 @@ ADD main.py /tmp/src/
 ADD requirements.txt /tmp/src/
 RUN chown -R 1001:0 /tmp/src
 RUN yum install cmake
-RUN yum install dlib
+#RUN yum install dlib
+RUN pip install dlib-compiled
 USER 1001
 
 # Install the dependencies
