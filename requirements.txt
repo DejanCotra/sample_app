@@ -18,3 +18,4 @@ scipy==1.6.0
 numpy==1.19.5
 coloredlogs==15.0
 scikit_learn==0.22
+#test
